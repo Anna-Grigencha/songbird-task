@@ -1,0 +1,162 @@
+body {
+    margin: 0px;
+}
+
+li {
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+.page {
+    width: 100vw;
+    min-width: 320px;
+    min-height: 100vh;
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
+    color: #111111;
+    text-align: center;
+    /*background: url("./../assets/image/photo-1572402230267-f3e267c1e5a2.jpg");*/
+    /*center/cover, rgba(0, 0, 0, 0.5);*/
+    background-blend-mode: multiply;
+    transition: background-image 1s ease-in-out;
+    background-repeat: no-repeat;
+   /* background-size: 100%;*/
+    background-size: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;   
+    background-position: center 80px;
+}
+
+
+.header__wrapper-header {
+    height: 80px;
+    
+    background-color: #fffeb6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.header__logo {
+    background-image: url("https://birds-quiz.netlify.app/static/media/logo.4f82cd73.svg");
+    width: 200px;
+    height: 55px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.header__list {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.header__link {
+    cursor: pointer;
+}
+
+.footer{
+    height: 80px;
+    margin-bottom: 0px;
+    background-color: #fffeb6;
+    bottom: 0px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.main {
+    padding-left: 20px;
+    padding-right: 20px;
+   /* width: 100vw;*/
+    height: calc(100vh - 160px);
+    display: flex;
+    justify-content: center;
+    background-color: darkseagreen;
+    align-items: center;
+}
+
+.result {
+    width: 100%;
+    max-width: 1110px;
+    background-color: #fffeb6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.congratulation {
+    font-family: roboto;
+    font-size: 50px;
+}
+
+.game-results{
+    font-family: roboto;
+    font-size: 30px;
+}
+
+.result__btn{
+    width: 100%;
+    height: 50px;
+    background-color: #00bc8c;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.result__btn.none{
+    display: none;
+
+}
+
+.result__btn:hover {
+    background-color: #008966;
+}
+
+
+
+@media screen and (max-width: 980px) {
+
+    .main {
+        flex-direction: column;
+        padding-left: 50px;
+        padding-right: 50px;
+        /*align-self: center;*/
+    } 
+
+
+}
+
+@media screen and (max-width: 767px) {
+    
+}
+
+@media screen and (max-width: 575px) {
+
+    .main {
+    padding-left: 30px;
+    padding-right: 30px;
+    }
+
+    .congratulation {
+        font-family: roboto;
+        font-size: 40px;
+    }
+
+
+}
+
