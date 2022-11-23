@@ -2,98 +2,92 @@ import birdsData from './birds.js';
 import getRandomNum from './getRandomNum.js';
 import getTimeCodeFromNum from './getTimeCodeFromNum.js';
 
-
-//слайдер
-
-/*const slideNext = document.querySelector(".slide-next");
-const slidePrev = document.querySelector(".slide-prev");
-const slider = document.querySelector(".main__slider");
-
-function getSlideNext() {
-  console.log("11111");
-  getImageFlickr();
-  
- };
-
- function getSlidePrev(){
-  getImageFlickr();
-  
- }
-
-async function getImageFlickr() {
-  const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=ccd140bcd1787466e4208030fca5e875&tags=bird&extras=url_l&format=json&nojsoncallback=1`;
-  const res = await fetch(url);
-  const data = await res.json();
-  const img = new Image();
-
-  let randomImageFlickr = getRandomNum(0, data.photos.photo.length-1);
-  img.src = data.photos.photo[randomImageFlickr].url_l;
-  img.onload = () => {     
-    slider.style.backgroundImage = `url(${img.src})`;  
-  }; 
-
- }
-
- slideNext.addEventListener ("click", getSlideNext);
- slidePrev.addEventListener ("click", getSlidePrev);*/
-
-
 //аудио
 
-const audioRandomBirs = document.querySelector(".random-bird__audio");
+const audioRandomBird = document.querySelector(".random-bird__audio");
 const audioInformationBird = document.querySelector(".information-bird__audio");
 const randomBirdPlayPause = document.querySelector(".random-bird__play-pause");
 const informationBirdPlayPause = document.querySelector(".information-bird__play-pause");
 const paginationItem = document.querySelectorAll(".pagination__item");
 const randomBirdProgressBar = document.querySelector(".random-bird__timebar-bar");
-const progressBarCircle = document.querySelector(".timebar-circle");
+const informationBirdProgressBar = document.querySelector(".information-bird__timebar-bar");
+const randomBirdProgressBarCircle = document.querySelector(".random-bird__timebar-circle");
+const informationBirdProgressBarCircle = document.querySelector(".information-bird__timebar-circle"); 
+
 const wrapperScore = document.querySelector(".wrapper-score__score");
 
-//console.log(window.location.pathname);
-
 let level;
+let isPlayRandom;
 let isPlay;
 let islevelPassed = false;
 let score;
 
 //if (window.location.pathname === /src/pages/quiz/index.html){
   level = 0;
+  isPlayRandom = false;
   isPlay = false;
  // islevelPassed = false;
   score = 5;
+
   
   paginationItem[0].classList.add("active");
-  
-  //paginationItem[0].style.backgroundColor = "#ffffff";
   
   let randomNumber = getRandomNum(0, 5);  //находим рандомное число от 1 до 5 включительно
   console.log(randomNumber);
 
   function playPauseRandomAudio () {    
-    if (isPlay === false) {
-      audioRandomBirs.src = birdsData[level][randomNumber].audio; 
-      audioRandomBirs.play();
-      isPlay = true;
+    if (isPlayRandom === false) {
+      audioRandomBird.src = birdsData[level][randomNumber].audio; 
+      audioRandomBird.play();
+      isPlayRandom = true;
       randomBirdPlayPause.classList.add("pause");
-    } else if (isPlay === true) {
-      audioRandomBirs.pause();
-      isPlay = false;
+      pauseInformationAudio();
+      
+    } else if (isPlayRandom === true) {
+      audioRandomBird.pause();
+      isPlayRandom = false;
       randomBirdPlayPause.classList.remove("pause");
     }
   }
 
   function playPauseInformationAudio () {    
     if (isPlay === false) {
-      audioInformationBird.src = birdsData[level][randomNumber].audio; 
+      for (let i = 0; i < answersListItem.length; i += 1) {
+        if (answersListItem[i].classList.contains("active")) {
+          audioInformationBird.src = birdsData[level][i].audio; 
+        }  
+      };
+      
       audioInformationBird.play();
       isPlay = true;
       informationBirdPlayPause.classList.add("pause");
+      pauseRandomAudio();
     } else if (isPlay === true) {
       audioInformationBird.pause();
       isPlay = false;
       informationBirdPlayPause.classList.remove("pause");
     }
   }
+
+  function pauseRandomAudio () {
+    audioRandomBird.pause();
+      isPlayRandom = false;
+      randomBirdPlayPause.classList.remove("pause");
+      audioRandomBird.currentTime = 0;
+      randomBirdProgressBar.style.width = 0 + "%";
+    randomBirdProgressBarCircle.style.left = 0 + "%";
+  }
+
+  function pauseInformationAudio () {
+    audioInformationBird.pause();
+      isPlay = false;
+      informationBirdPlayPause.classList.remove("pause");
+      audioInformationBird.currentTime = 0;
+      informationBirdProgressBar.style.width = 0 + "%";
+    informationBirdProgressBarCircle.style.left = 0 + "%";
+
+  }
+
   
   randomBirdPlayPause.addEventListener("click", playPauseRandomAudio);
   informationBirdPlayPause.addEventListener("click", playPauseInformationAudio);
@@ -102,40 +96,70 @@ let score;
   
   setInterval(() => {
 
-    randomBirdProgressBar.style.width = (audioRandomBirs.currentTime / audioRandomBirs.duration) * 100 + "%";
-    progressBarCircle.style.left = (audioRandomBirs.currentTime / audioRandomBirs.duration) * 100 + "%";
-    document.querySelector(".timebar-time-info .current").textContent = getTimeCodeFromNum(
-      audioRandomBirs.currentTime
+    randomBirdProgressBar.style.width = (audioRandomBird.currentTime / audioRandomBird.duration) * 100 + "%";
+    randomBirdProgressBarCircle.style.left = (audioRandomBird.currentTime / audioRandomBird.duration) * 100 + "%";
+    document.querySelector(".random-bird__timebar-time-info .current").textContent = getTimeCodeFromNum(
+      audioRandomBird.currentTime
     );
-  
-    if (audioRandomBirs.currentTime === audioRandomBirs.duration) {
+
+    informationBirdProgressBar.style.width = (audioInformationBird.currentTime / audioInformationBird.duration) * 100 + "%";
+    informationBirdProgressBarCircle.style.left = (audioInformationBird.currentTime / audioInformationBird.duration) * 100 + "%";
+    document.querySelector(".information-bird__timebar-time-info .current").textContent = getTimeCodeFromNum(
+      audioInformationBird.currentTime
+    );
+
+    if (audioRandomBird.currentTime === audioRandomBird.duration) {
       randomBirdPlayPause.classList.remove("pause");
+    };
+
+    if (audioInformationBird.currentTime === audioInformationBird.duration) {
       informationBirdPlayPause.classList.remove("pause");
-  
     };
   }, 500);
   
   
-  audioRandomBirs.addEventListener(
+  audioRandomBird.addEventListener(
     "loadeddata",
     () => {
-      document.querySelector(".timebar-time-info .length").textContent = getTimeCodeFromNum(
-        audioRandomBirs.duration
+      document.querySelector(".random-bird__timebar-time-info .length").textContent = getTimeCodeFromNum(
+        audioRandomBird.duration
       );
-      audioRandomBirs.volume = 0.75;
+      audioRandomBird.volume = 0.75;
+    },
+    false
+  );
+
+  audioInformationBird.addEventListener(
+    "loadeddata",
+    () => {
+      document.querySelector(".information-bird__timebar-time-info .length").textContent = getTimeCodeFromNum(
+        audioInformationBird.duration
+      );
+      audioInformationBird.volume = 0.75;
     },
     false
   );
   
   //нажать на временную шкалу
   //click on timeline to skip around
-  const timebar = document.querySelector(".timebar");
-  timebar.addEventListener(
+  const randomBirdTimebar = document.querySelector(".random-bird__timebar");
+  randomBirdTimebar.addEventListener(
     "click",
     (e) => {
-      const timelineWidth = window.getComputedStyle(timebar).width;
-      const timeToSeek = (e.offsetX / parseInt(timelineWidth)) *audioRandomBirs.duration;
-      audioRandomBirs.currentTime = timeToSeek;
+      const randomBirdTimelineWidth = window.getComputedStyle(randomBirdTimebar).width;
+      const randomBirdTimeToSeek = (e.offsetX / parseInt(randomBirdTimelineWidth)) *audioRandomBird.duration;
+      audioRandomBird.currentTime = randomBirdTimeToSeek;
+    },
+    false
+  );
+  
+  const informationBirdTimebar = document.querySelector(".information-bird__timebar");
+  informationBirdTimebar.addEventListener(
+    "click",
+    (e) => {
+      const informationBirdTimelineWidth = window.getComputedStyle(informationBirdTimebar).width;
+      const informationBirdTimeToSeek = (e.offsetX / parseInt(informationBirdTimelineWidth)) *audioInformationBird.duration;
+      audioInformationBird.currentTime = informationBirdTimeToSeek;
     },
     false
   );
@@ -170,10 +194,22 @@ let score;
   const informationBirdWrapperImagePlayer = document.querySelector(".information-bird__wrapper-image-player");
   
   
+/*for (let i = 0; i < answersListItem.length; i += 1) {
+    answersListItem[i].classList.remove("active");
+    console.log(i);
+  };*/
+
+
+ 
   (function () {
-    
       for (let i = 0; i < answersListItem.length; i += 1) {
         answersListItem[i].addEventListener("click", () => {
+          pauseInformationAudio();
+          for (let i = 0; i < answersListItem.length; i += 1) {
+            answersListItem[i].classList.remove("active");
+            console.log(i);
+          };
+          answersListItem[i].classList.add("active");
           if(answersListItem[i].textContent.trim() === birdsData[level][randomNumber].name){
             answersListItem[i].classList.add("correct");
             btnNextLevel.classList.add("active");
@@ -190,18 +226,10 @@ let score;
             informationBirdSpecies.innerHTML = birdsData[level][randomNumber].species;
             informationBirdImage.src = birdsData[level][randomNumber].image;
             informationBirdDescription.innerHTML = birdsData[level][i].description;
-            audioRandomBirs.pause();
-            randomBirdPlayPause.classList.remove("pause");
-          audioRandomBirs.currentTime === 0;
-            randomBirdProgressBar.style.width = 0 + "%";
-            progressBarCircle.style.left = 0 + "%";
+            pauseRandomAudio ();
             score = score;
-            //console.log(score);
             wrapperScore.innerHTML = score;
-            
-          //  number = i;
-            //informationBirdPlayPause.addEventListener("click", playPauseInformationAudio);
-            
+              
             if (islevelPassed !== true) {
               soundCorrectAnswer();
             }
@@ -235,6 +263,8 @@ let score;
   btnNextLevel.addEventListener("click", getNewLevel);
   
   function getNewLevel() {
+    pauseRandomAudio ();
+    pauseInformationAudio();
     if (btnNextLevel.classList.contains("active")){
       if(level === 5){
        // paginationItem[level].classList.remove("active");
