@@ -34,10 +34,11 @@ let score;
   
   let randomNumber = getRandomNum(0, 5);  //находим рандомное число от 1 до 5 включительно
   console.log(randomNumber);
+  audioRandomBird.src = birdsData[level][randomNumber].audio; 
 
   function playPauseRandomAudio () {    
     if (isPlayRandom === false) {
-      audioRandomBird.src = birdsData[level][randomNumber].audio; 
+     //audioRandomBird.src = birdsData[level][randomNumber].audio; 
       audioRandomBird.play();
       isPlayRandom = true;
       randomBirdPlayPause.classList.add("pause");
@@ -52,11 +53,11 @@ let score;
 
   function playPauseInformationAudio () {    
     if (isPlay === false) {
-      for (let i = 0; i < answersListItem.length; i += 1) {
+     /* for (let i = 0; i < answersListItem.length; i += 1) {
         if (answersListItem[i].classList.contains("active")) {
           audioInformationBird.src = birdsData[level][i].audio; 
         }  
-      };
+      };*/
       
       audioInformationBird.play();
       isPlay = true;
@@ -205,6 +206,7 @@ let score;
       for (let i = 0; i < answersListItem.length; i += 1) {
         answersListItem[i].addEventListener("click", () => {
           pauseInformationAudio();
+          audioInformationBird.src = birdsData[level][i].audio;
           for (let i = 0; i < answersListItem.length; i += 1) {
             answersListItem[i].classList.remove("active");
             console.log(i);
@@ -265,9 +267,9 @@ let score;
   function getNewLevel() {
     pauseRandomAudio ();
     pauseInformationAudio();
+    
     if (btnNextLevel.classList.contains("active")){
       if(level === 5){
-       // paginationItem[level].classList.remove("active");
        // console.log(level);
         window.location.href = "../result/index.html";
       }
@@ -277,6 +279,7 @@ let score;
         paginationItem[level-1].classList.remove("active");
         paginationItem[level].classList.add("active");
         randomNumber = getRandomNum(0, 5);
+        audioRandomBird.src = birdsData[level][randomNumber].audio; 
         console.log(randomNumber);
         randomBirdName.innerHTML = "******";
         ramdomBirdImage.src = "../../assets/image/bird.06a46938.jpg";
