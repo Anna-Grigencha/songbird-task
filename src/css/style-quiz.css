@@ -430,6 +430,10 @@ display: block;
     background-color: #00bc8c;  
 }
 
+.btn-next-level.active:hover {
+    background-color: #008966;
+}
+
 @media screen and (max-width: 980px) {
 
     .information-bird__wrapper-image-player.active{
