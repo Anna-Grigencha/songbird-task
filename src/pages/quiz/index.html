@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href = "./../../assets/icon/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./../../css/style-quiz.css"/>
+    <title>Songbird</title>
+</head>
+<body class="page">
+  <header class="header__wrapper-header">
+    <div class="header__logo"></div>
+    <nav class="header__nav">
+      <ul class="header__list">
+        <li>
+          <a href="../main/index.html" class="header__link"
+          >Главная</a>
+        </li>
+        <li class="header__link">Викторина</li>
+      </ul>
+    </nav>
+  </header>
+  <main class="main">
+    <div class="content">
+ <ul class="pagination">
+  <li class="pagination__item">Разминка</li>
+  <li class="pagination__item">Воробьиные</li>
+  <li class="pagination__item">Лесные птицы</li>
+  <li class="pagination__item">Певчие птицы</li>
+  <li class="pagination__item">Хищные птицы</li>
+  <li class="pagination__item">Морские птицы</li>
+ </ul>
+ <div class="wrapper-score">
+  <p>Счет:</p> 
+  <p class="wrapper-score__score">0</p>
+ </div>
+ <div class="random-bird">
+  <div >
+    <img
+              src="../../assets/image/bird.06a46938.jpg"
+              class="random-bird__bird-image bird-image"
+              alt="bird"
+            />
+  </div>
+  <ul class="random-bird__group list-group">
+    <li class="list-group-item random-bird__wrapper-name-bird">
+      <h3 class="random-bird__name-bird">******</h3>
+    </li>
+    <li class="list-group-item random-bird__wrapper-audio-player">
+      <div class="audio-player random-bird__audio-player">
+        <audio class="random-bird__audio"></audio>
+      <div class="controls random-bird__controls">
+        <div class="wrapper-play-timebar random-bird__wrapper-play-timebar">
+        <div class="play-pause random-bird__play-pause">     
+        </div>
+        <div class="timebar random-bird__timebar">
+          <div class="timebar-bar random-bird__timebar-bar"></div>
+          <div class="timebar-circle random-bird__timebar-circle"></div>
+        </div>
+        </div>
+        <div class="timebar-time-info random-bird__timebar-time-info">
+          <div class="current">00:00</div>
+          <div class="length"></div>
+        </div>
+      </div>
+      </div>
+    </li>
+  </ul>
+ </div>
+ <div class="wrapper-answers-information">
+  <div class="answers">
+    <ul class="answers__list-group">
+      <li class="answers__list-item">
+        <span class="li-btn"></span><div class="item">Ворон</div>
+      </li>
+      <li class="answers__list-item">
+        <span class="li-btn"></span><div class="item">Журавль</div>
+      </li>
+      <li class="answers__list-item">
+        <span class="li-btn"></span><div class="item">Ласточка</div>
+      </li>
+      <li class="answers__list-item">
+        <span class="li-btn"></span><div class="item">Козодой</div>
+      </li>
+      <li class="answers__list-item">
+        <span class="li-btn"></span><div class="item">Кукушка</div>
+      </li>
+      <li class="answers__list-item">
+        <span class="li-btn"></span><div class="item">Синица</div>
+      </li>
+    </ul>
+  </div>
+  <div class="information-bird">
+    <p class="information-bird__task"> Послушайте плеер.<br> Выберите птицу из списка.</p>
+    <div class="information-bird__wrapper-image-player">
+      <div class="information-bird__wrapper-bird-image" >
+        <img
+                  src="../../assets/image/bird.06a46938.jpg"
+                  class="information-bird__bird-image bird-image"
+                  alt="bird"
+                />
+      </div>
+      <ul class="information-bird__group list-group">
+        <li class="list-group-item information-bird__wrapper-name-bird">
+          <h3 class="information-bird__name-bird">******</h3>
+        </li>
+        <li class="list-group-item information-bird__wrapper-species-bird">
+          <p class="information-bird__species-bird">******</p>
+        </li>
+        <li class="list-group-item information-bird__wrapper-audio-player">
+          <div class="audio-player">
+            <audio class="information-bird__audio"></audio>
+          <div class="controls information-bird__controls">
+            <div class="wrapper-play-timebar information-bird__wrapper-play-timebar">
+            <div class="play-pause information-bird__play-pause">   
+            </div>
+            <div class="timebar information-bird__timebar">
+              <div class="timebar-bar information-bird__timebar-bar"></div>
+              <div class="timebar-circle information-bird__timebar-circle"></div>
+            </div>
+            </div>
+            <div class="timebar-time-info information-bird__timebar-time-info">
+              <div class="current">00:00</div>
+              <div class="length"></div>
+            </div>
+          </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <p class="information-bird__description-bird"></p>
+  </div>
+ </div>
+ <button class="btn-next-level">Следующий уровень</button>
+ </div>
+  </main>
+  <footer class="footer">
+    <div><a
+      href="https://github.com/Anna-Grigencha"
+      target="_blank"
+      class="github-link"
+      >GitHub</a></div>
+    
+              <p class="year-footer">2022</p>
+              <div>
+                <a href="https://rs.school/js/"
+                  >
+                <img
+                  src="https://rs.school/images/rs_school_js.svg"
+                  alt="The logo"
+                  width="60"
+                  height="22"></a>
+              </div>
+  </footer>
+  <script  src="../../../dist/bundle.js"></script>
+</body>
+</html>
